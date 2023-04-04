@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                sh "docker build -t ${DOCKER_REGISTRY}/your-image-name:${IMAGE_TAG} ."
+                sh "docker build -t ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG} ."
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withCredentials([env.DOCKERHUB_CREDENTIALS]) {
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-                    sh "docker push ${DOCKER_REGISTRY}/your-image-name:${IMAGE_TAG}"
+                    sh "docker push ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG}"
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
         stage('Update manifest file') {
             steps {
                 sh """
-                    sed -i 's/image: your-image-name:.*/image: your-image-name:${IMAGE_TAG}/' ${MANIFEST_FILE}
+                    sed -i 's/image: meri-sexy-repo:.*/image: meri-sexy-repo:${IMAGE_TAG}/' ${MANIFEST_FILE}
                     git add ${MANIFEST_FILE}
                     git commit -m 'Update manifest file with new image tag'
                     git push -u origin main
