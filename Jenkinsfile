@@ -23,8 +23,8 @@ pipeline {
         stage('Push Docker image') {
             steps {
                 withCredentials([env.DOCKERHUB_CREDENTIALS]) {
-                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-                    sh "docker push ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG}"
+                    sh "sudo docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                    sh "sudo docker push ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG}"
                 }
             }
         }
