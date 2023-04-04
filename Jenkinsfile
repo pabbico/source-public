@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                sh "docker build -t ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG} ."
+                sh "sudo docker build -t ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG} ."
             }
         }
 
