@@ -35,6 +35,8 @@ pipeline {
                     sed -i 's/image: meri-sexy-repo:.*/image: meri-sexy-repo:${IMAGE_TAG}/' ${MANIFEST_FILE}
                     git add ${MANIFEST_FILE}
                     git commit -m 'Update manifest file with new image tag'
+                    git remote set-url origin https://github.com/pabbico/output-public.git
+                   
                     git push -u origin main
                 """
             }
