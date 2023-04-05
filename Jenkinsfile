@@ -38,7 +38,7 @@ pipeline {
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
                         git remote set-url origin https://github.com/pabbico/output-public.git
-                        git push -u origin 
+                        git push -u origin HEAD:main
                 """
             }
         }
