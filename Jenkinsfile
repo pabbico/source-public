@@ -32,11 +32,11 @@ pipeline {
         stage('Update manifest file') {
             steps {
                 sh """
-                    sed -i 's/image: pawani2k2\/meri-sexy-repo.*/image: pawani2k2\/meri-sexy-repo:${IMAGE_TAG}/' ${MANIFEST_FILE}
-                    git add ${MANIFEST_FILE}
-                    git commit -m 'Update manifest file with new image tag'
-                    git remote set-url origin https://github.com/pabbico/output-public.git
-                    git push -u origin
+                        sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE}
+                        git add ${MANIFEST_FILE}
+                        git commit -m 'Update manifest file with new image tag'
+                        git remote set-url origin https://github.com/pabbico/output-public.git
+                        git push -u origin
                 """
             }
         }
