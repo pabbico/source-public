@@ -12,16 +12,23 @@ pipeline {
     }
 
     stages {
-        
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from the GitHub repository
+                git credentialsId: 'output-public', url: GITHUB_REPO
+            }
+        }
 
         stage('Build Docker image') {
             steps {
+                // Build the Docker image with a unique tag
                 sh "sudo docker build -t ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG} ."
             }
         }
 
         stage('Push Docker image') {
             steps {
+                // Login to Docker Hub and push the Docker image with the unique tag
                 withCredentials([usernamePassword(credentialsId: 'docker-public', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                     sh 'sudo docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
                     sh 'sudo docker push ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG}'
@@ -31,6 +38,7 @@ pipeline {
 
         stage('Update manifest file') {
             steps {
+                // Update the Kubernetes manifest file with the new image tag
                 withCredentials([usernamePassword(credentialsId: 'output-public', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
                     sh """
                         sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE}
@@ -39,7 +47,7 @@ pipeline {
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
                         git remote set-url origin https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/pabbico/output-public.git
-                        git push origin HEAD:main --force
+                        git push origin main
                     """
                 }
             }
