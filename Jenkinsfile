@@ -31,7 +31,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'output-public', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
                     sh """
-                        sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE} // Escape the forward slashes in the sed command Escape the forward slashes in the sed command
+                        sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE}
                         git config --global user.name "pawan"
                         git config --global user.email "pawan.sharma@i2k2.com"
                         git clone ${GITHUB_REPO} // Clone the repository instead of setting the remote URL
