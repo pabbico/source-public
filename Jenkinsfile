@@ -5,7 +5,7 @@ pipeline {
         DOCKER_REGISTRY = 'pawani2k2'
         DOCKERHUB_CREDENTIALS = credentials('docker-public')
         GITHUB_CREDENTIALS = credentials('output-public')
-        GITHUB_REPO = 'https://github.com/pabbico/output-public.git'
+        GITHUB_REPO = 'https://github.com/pabbico/output2-public.git'
         MANIFEST_FILE = 'nginx-deployment.yaml'
         BUILD_ID = sh(script: "echo ${BUILD_ID}", returnStdout: true).trim()
         IMAGE_TAG = "v${BUILD_ID}"
