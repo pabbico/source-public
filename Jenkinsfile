@@ -16,6 +16,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 sh "sudo docker build -t ${DOCKER_REGISTRY}/meri-sexy-repo:${IMAGE_TAG} ."
+                rm -rf output2-public
             }
         }
 
