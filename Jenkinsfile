@@ -38,8 +38,8 @@ pipeline {
                         git config --global user.email "pawan.sharma@i2k2.com"
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
-                        git remote set-url origin https://pabbico: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@github.com/pabbico/output-public.git
-                        git push remote origin main
+                        git remote set-url origin https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/new-org/new-repo.git
+                        git push origin main
                     """
                 }
             }
