@@ -39,7 +39,7 @@ pipeline {
                         cp ${WORKSPACE}/${MANIFEST_FILE} ./
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
-                        git push --set-upstream origin main
+                        git push --set-upstream origin main https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/pabbico/output2-public.git
                     """
             }
         }
