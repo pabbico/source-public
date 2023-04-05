@@ -33,13 +33,13 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'output-public', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
                     sh """
                         sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE}
-                        git clone -b main ${GITHUB_REPO} // Clone the repository instead of setting the remote URL
-                        cd output-public // Change directory to the cloned repository
-                        git checkout main // Checkout the main branch
-                        cp ${WORKSPACE}/${MANIFEST_FILE} ./ // Copy the updated manifest file to the cloned repository
+                        git clone -b main ${GITHUB_REPO}
+                        cd output-public
+                        git checkout main
+                        cp ${WORKSPACE}/${MANIFEST_FILE} ./
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
-                        git push --set-upstream origin main // Use --set-upstream to set the upstream branch
+                        git push --set-upstream origin main
                     """
             }
         }
