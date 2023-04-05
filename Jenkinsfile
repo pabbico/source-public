@@ -12,12 +12,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the source code from the GitHub repository
-                git credentialsId: 'output-public', url: GITHUB_REPO
-            }
-        }
 
         stage('Build Docker image') {
             steps {
@@ -35,6 +29,13 @@ pipeline {
                 }
             }
         }
+         stage('Checkout') {
+            steps {
+                // Checkout the source code from the GitHub repository
+                git credentialsId: 'output-public', url: GITHUB_REPO
+            }
+        }
+
 
         stage('Update manifest file') {
             steps {
