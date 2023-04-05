@@ -34,7 +34,7 @@ pipeline {
                     sh """
                         sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE}
                         git clone -b main ${GITHUB_REPO}
-                        cd output-public
+                        cd output2-public/
                         git checkout main
                         cp ${WORKSPACE}/${MANIFEST_FILE} ./
                         git add ${MANIFEST_FILE}
