@@ -31,15 +31,16 @@ pipeline {
 
         stage('Update manifest file') {
             steps {
-                sh """
+                withCredentials([usernamePassword(credentialsId: 'output-public', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
+                    sh """
                         sed -i "s/image: pawani2k2\\/meri-sexy-repo.*/image: pawani2k2\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE}
                         git config --global user.name "pawan"
                         git config --global user.email "pawan.sharma@i2k2.com"
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
-                        git remote set-url origin https://github.com/pabbico/output-public.git
                         git push -u origin HEAD:main
-                """
+                    """
+                }
             }
         }
     }
