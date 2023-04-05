@@ -38,7 +38,7 @@ pipeline {
                         git config --global user.email "pawan.sharma@i2k2.com"
                         git add ${MANIFEST_FILE}
                         git commit -m 'Update manifest file with new image tag'
-                        git push -u origin HEAD:main
+                         git push -u https://pabbico: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@github.com/pabbico/output-public.git main
                     """
                 }
             }
