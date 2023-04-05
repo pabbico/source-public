@@ -33,7 +33,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'output-public', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
                     sh """
                         pwd
-                        sed -i "s/image: ${DOCKER_REGISTRY}\\/meri-sexy-repo.*/image: ${DOCKER_REGISTRY}\\/meri-sexy-repo:${IMAGE_TAG}/" ${MANIFEST_FILE} // Escape the forward slashes in the sed command
+                        sed -i 's/image: pawani2k2\/meri-sexy-repo.*/image: pawani2k2\/meri-sexy-repo:${BUILD_ID}/' ${MANIFEST_FILE} // Escape the forward slashes in the sed command
                         git clone -b main ${GITHUB_REPO} // Clone the repository instead of setting the remote URL
                         cd output-public // Change directory to the cloned repository
                         git checkout main // Checkout the main branch
